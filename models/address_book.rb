@@ -1,23 +1,39 @@
 require_relative 'entry'
+require_relative 'controllers/menu_controller'
 
-class AddressBook
-  attr_reader :entries
-  def initialize
-     @entries = []
-   end
+ menu = MenuController.new
 
+ system "clear"
+ puts "Welcome to AddressBloc!"
 
-def add_entry(name, phone_number, email)
-  # #9
-  index = 0
-  entries.each do |entry|
-  # #10
-    if name < entry.name
-      break
+ menu.main_menu
+
+ class AddressBook
+   attr_reader :entries
+   def initialize
+      @entries = []
     end
-    index+= 1
+
+ def remove_entry(name, phone, email)
+   delete_entry = nil
+
+   @entries.each do |entry|
+     if name == entry.name && phone == entry.phone_number && email == entry.email
+       delete_entry = entry
   end
-  # #11
-  entries.insert(index, Entry.new(name, phone_number, email))
-end
-end
+ end
+
+   @entries.delete(delete_entry)
+ end
+
+ def add_entry(name, phone_number, email)
+   index = 0
+   entries.each do |entry|
+     if name < entry.name
+       break
+     end
+     index+= 1
+   end
+   entries.insert(index, Entry.new(name, phone_number, email))
+ end
+ end
