@@ -1,4 +1,4 @@
-require_relative '../models/address_book'
+require_relative './models/address_book'
 
  RSpec.describe AddressBook do
    describe "attributes" do
