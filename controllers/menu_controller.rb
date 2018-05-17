@@ -59,6 +59,22 @@ class MenuController
         puts "End of entries"
     end
 
+    def view_entry_by_number
+        system "clear"
+        print "Entry number: "
+        entry_number = gets.chomp.to_i
+
+        address_book.entries.each do |entry|
+            if address_book.entries.index(entry) == (entry_number - 1)
+                system "clear"
+                puts entry.to_s
+           else
+               system "clear"
+               puts "Not a valid entry"
+            end
+        end
+    end
+
     def create_entry
         system "clear"
         puts "New AddressBloc Entry"
