@@ -1,3 +1,5 @@
+
+
 require_relative '../models/address_book'
 
 class MenuController
@@ -13,7 +15,8 @@ class MenuController
         puts "2 - Create an entry"
         puts "3 - Search for an entry"
         puts "4 - Import entries from a CSV"
-        puts "5 - Exit"
+        puts "5 - Delete all entries"
+        puts "6 - Exit"
         print "Enter your selection: "
 
         selection = gets.to_i
@@ -36,6 +39,10 @@ class MenuController
                 read_csv
                 main_menu
             when 5
+                system "clear"
+                demolish_all_entries
+                main_menu
+            when 6
                 puts "Good-bye!"
 
                 exit(0)
@@ -94,6 +101,21 @@ class MenuController
         else
             puts "No match found for #{name}"
         end
+    end
+
+    def demolish_all_entries
+        puts "Are you sure you want to delete all entries? - 'Y' or 'N' ?"
+        confirmation = gets.chomp.upcase
+            if confirmation == "Y"
+                address_book.entries.clear
+                puts "All entries have been deleted"
+            elsif confirmation == "N"
+                system "clear"
+                main_menu
+            else
+                puts "Not a valid response"
+                demolish_all_entries
+            end
     end
 
     def read_csv
